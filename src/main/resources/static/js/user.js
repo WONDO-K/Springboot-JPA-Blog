@@ -27,7 +27,7 @@ let index={
 				// ajax가 통신을 성공하고 json을 리턴해주면 서버가 자동으로 자바오브젝트로 변환해준다
 				$.ajax({
 					type:"POST",
-					url:"/blog/api/user",
+					url:"/api/user",
 					data: JSON.stringify(data), // http body 데이터 JSON 문자열 /data
 												// : data로 하면 자바스크립트 오브젝트
 												
@@ -40,7 +40,7 @@ let index={
 				}).done(function(resp){ // 요청 성공
 					alert("회원가입이 완료!");
 					console.log(resp);
-					location.href="/blog"; // 수행 후 이동 페이지
+					location.href="/"; // 수행 후 이동 페이지
 				}).fail(function(error){ // 요청 실패
 					alert(JSON.stringify(error));
 				}); 
@@ -59,7 +59,7 @@ let index={
 			// ajax가 통신을 성공하고 json을 리턴해주면 서버가 자동으로 자바오브젝트로 변환해준다
 			$.ajax({
 				type:"POST",
-				url:"/blog/api/user/login",
+				url:"/api/user/login",
 				data: JSON.stringify(data), // http body 데이터 JSON 문자열 /data :
 											// data로 하면 자바스크립트 오브젝트
 											
@@ -71,7 +71,7 @@ let index={
 			}).done(function(resp){ // 요청 성공
 				alert("로그인 완료!");
 				console.log(resp);
-				location.href="/blog"; // 수행 후 이동 페이지
+				location.href="/"; // 수행 후 이동 페이지
 			}).fail(function(error){ // 요청 실패
 				alert(JSON.stringify(error));
 			}); 
