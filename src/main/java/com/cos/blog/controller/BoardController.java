@@ -5,11 +5,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class BoardController {
+	
 
+//@AuthenticationPrincipal PrincipalDetail principal
 	@GetMapping({"","/"})
-	public String index() {
+	public String index() { 
 		//      prefix: /WEB-INF/views/
 		//      suffix: .jsp
 		return "index";
+	}
+	//USER 권한이 필요
+	@GetMapping("/board/saveForm")
+	public String saveForm() {
+		return "board/saveForm";
 	}
 }
