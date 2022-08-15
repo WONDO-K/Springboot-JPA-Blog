@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 		.csrf().disable()//csrf 토큰 비활성화 (테스티 시에 걸어주기)
 		.authorizeRequests()
-			.antMatchers("/","/auth/**","/js/**","/css/**","/image/**") 	// /auth이하 경로는 모두 접근 가능
+			.antMatchers("/","/auth/**","/js/**","/css/**","/image/**","/dummy/**") 	// /auth이하 경로는 모두 접근 가능
 			.permitAll()
 			.anyRequest() 				// 다른 모든 접근은
 			.authenticated()			// 인증이 필요하다

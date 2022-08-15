@@ -9,7 +9,7 @@ import com.cos.blog.model.Board;
 import com.cos.blog.model.User;
 
 
-public interface BoardRepository extends JpaRepository<Board, Integer>{ 
+public interface BoardRepository extends JpaRepository<Board, Integer>{ //JpaRepository가 다 들고있음
 																	 
 	
 }

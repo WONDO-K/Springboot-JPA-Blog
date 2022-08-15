@@ -23,7 +23,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@Data
+@Data //getter setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder //빌더 패턴
