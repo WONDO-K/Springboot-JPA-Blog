@@ -32,7 +32,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에서 연결된 DB의 넘버링 전략을 따라간다.
 	private int id; // 오라클 시퀀스 , MySQL auto_increment
 	
-	@Column(nullable = false, length=30, unique=true)
+	@Column(nullable = false, length=200, unique=true)
 	private String username; //아이디
 	
 	@Column(nullable = false, length=100) // 123456 => 해쉬 (비밀번호를 암호화)
@@ -46,6 +46,9 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	//@ColumnDefault("user")
 	private RoleType role; //Enum을 쓰는게 좋다.(도메인(범위) 설정가능) // RoleType => ADMIN(관리자),USER 만 입력할 수 있게 고정
+	
+	private String oauth; // kakao, google ....
+	
 	
 	@CreationTimestamp //시간이 자동입력
 	private Timestamp createDate;

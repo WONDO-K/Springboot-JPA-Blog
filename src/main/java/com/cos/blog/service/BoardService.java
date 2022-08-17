@@ -30,6 +30,7 @@ public class BoardService {
 	public Page<Board> 글목록(Pageable pageable){
 		return boardRepository.findAll(pageable); //findAll() 다 가져올수 있음
 	}
+	
 	@Transactional(readOnly = true)
 	public Board 글상세보기(int id) {
 		return boardRepository.findById(id)
@@ -37,6 +38,7 @@ public class BoardService {
 					return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
 				});
 	}
+	
 	@Transactional
 	public void 글삭제하기(int id, PrincipalDetail principal) {
 		System.out.println("글 삭제하기: " + id);
