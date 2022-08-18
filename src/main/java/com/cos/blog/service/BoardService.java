@@ -2,6 +2,8 @@ package com.cos.blog.service;
 
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,6 +49,7 @@ public class BoardService {
 				.orElseThrow(()->{
 					return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
 				});
+	
 	}
 	
 	@Transactional
@@ -117,6 +120,13 @@ public class BoardService {
 	public void 댓글삭제(int replyId) {
 		replyRepository.deleteById(replyId);
 	}
+	
+	@Transactional
+	public int updateCount(int id) {
+		return boardRepository.updateCount(id);
+		
+	}
+	
 }
 
 
