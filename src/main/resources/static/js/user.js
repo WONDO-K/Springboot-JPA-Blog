@@ -38,9 +38,12 @@ let index={
 										// String(문자열)이지만 생김새가 json이라면 =>
 										// javascript 오브젝트로 변경해준다
 				}).done(function(resp){ // 요청 성공
-					alert("회원가입이 완료!");
-					console.log(resp);
-					location.href="/"; // 수행 후 이동 페이지
+					if(resp.status == 500){
+						alert("회원가입 실패");
+					}else{
+						alert("회원가입 완료!");
+						location.href="/"; // 수행 후 이동 페이지						
+					}
 				}).fail(function(error){ // 요청 실패
 					alert(JSON.stringify(error));
 				}); 

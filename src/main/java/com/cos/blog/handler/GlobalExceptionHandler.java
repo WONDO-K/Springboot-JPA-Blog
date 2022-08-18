@@ -1,4 +1,4 @@
-package com.cos.blog.handler;
+ package com.cos.blog.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,6 +18,6 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(value=Exception.class) //IllegalArgumentException이 발생하면 
 	public ResponseDto<String> handleArgumentException(Exception e) { //스프링이 e 함수에 전달해준다
-		return new ResponseDto<String>(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage());
+		return new ResponseDto<String>(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage()); // INTERNAL_SERVER_ERROR : 500
 	}
 }

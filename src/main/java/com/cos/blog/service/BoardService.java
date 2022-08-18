@@ -9,9 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.blog.config.auth.PrincipalDetail;
+import com.cos.blog.dto.ReplySaveRequestDto;
 import com.cos.blog.model.Board;
+import com.cos.blog.model.Reply;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.BoardRepository;
+import com.cos.blog.repository.ReplyRepository;
+import com.cos.blog.repository.UserRepository;
 
 
 @Service
@@ -19,6 +23,12 @@ public class BoardService {
 	
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private ReplyRepository replyRepository;
+	
+//	@Autowired
+//	private UserRepository userRepository;
 		
 	@Transactional 
 	public void 글쓰기(Board board, User user) { //title, content
@@ -63,5 +73,50 @@ public class BoardService {
 		board.setContent(requestboard.getContent());
 		//해당 함수로 종료시(Service가 종료될 때) 트랜잭션이 종료된다. 이때 더티체킹 - 자동 업데이트 됨. db flush(commit)
 	}
+	
+	@Transactional
+	public void 댓글쓰기(User user, int boardId, Reply requestReply) {
+		
+		Board board = boardRepository.findById(boardId).orElseThrow(()->{
+			return new IllegalArgumentException("댓글 쓰기 실패 : 게시글 아이디를 찾을 수 없습니다.");
+		}); //영속화 완료;
+		
+		requestReply.setUser(user);
+		requestReply.setBoard(board);
+		
+		replyRepository.save(requestReply);
+		
+	}
+//	//네이티브 쿼리 사용하기
+//	@Transactional
+//	public void 댓글쓰기(ReplySaveRequestDto replySaveRequestDto) {
+//		int result = replyRepository.mSave(replySaveRequestDto.getUserId(), replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
+//		System.out.println(result); // 오브젝트를 출력하게 되면 toString이 호출된다.
+//	}
+//	
+	
+// DTO 사용하기
+//	@Transactional
+//	public void 댓글쓰기(ReplySaveRequestDto replySaveRequestDto) {
+//		
+//		User user = userRepository.findById(replySaveRequestDto.getUserId()).orElseThrow(()->{
+//			return new IllegalArgumentException("댓글 쓰기 실패 : 유저 아이디를 찾을 수 없습니다.");
+//		}); //영속화 완료;
+//		
+//		Board board = boardRepository.findById(replySaveRequestDto.getBoardId()).orElseThrow(()->{
+//			return new IllegalArgumentException("댓글 쓰기 실패 : 게시글 아이디를 찾을 수 없습니다.");
+//		}); //영속화 완료;
+//		
+//		Reply reply = new Reply();
+//		reply.update(user, board, replySaveRequestDto.getContent());
+//
+//		replyRepository.save(reply);
+//	}
+	
+	@Transactional
+	public void 댓글삭제(int replyId) {
+		replyRepository.deleteById(replyId);
+	}
 }
+
 
